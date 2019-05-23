@@ -26,7 +26,7 @@
 	<c:if test="${member !=null }">
 		<input type="button" value="로그아웃" onclick="location.href='./member/logout.do'">
 	</c:if>
-	<span class="w3-button w3-hover-black w3-round-xlarge" title="아이디 찾기" id="find_id_btn">아이디 찾기</span>
+	<span class="w3-button w3-block w3-black w3-ripple w3-round" title="아이디 찾기" id="find_id_btn">아이디 찾기</span>
 	<input type="button" value="아이디 찾기" id="find_id_btn">
 </body>
 </html>

@@ -76,11 +76,10 @@ public class MemberController {
 		service.logout(response);
 	}
 	
-	// 아이디 찾기 폼
 	@RequestMapping(value = "/find_id_form.do")
 	public String find_id_form() throws Exception{
 		return "/member/find_id_form";
-	}	
+	}
 	
 	// @RequestParam 및 @ModelAttribute 어노테이션 관련 정보
 	// https://heavenly-appear.tistory.com/302
