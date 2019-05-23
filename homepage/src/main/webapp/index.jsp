@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<input type="button" value="회원가입" onclick="location.href='./member/memberJoinForm.do'">
+	<input type="button" value="회원가입" onclick="location.href='../member/memberJoinForm.do'">
 	<c:if test="${ member == null }">
 		<input type="button" value="로그인" onclick="location.href='./member/login_form.do'">
 	</c:if>
