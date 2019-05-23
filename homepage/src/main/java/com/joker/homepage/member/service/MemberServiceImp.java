@@ -64,6 +64,11 @@ public class MemberServiceImp implements MemberService {
 			manager.join_member(member);
 			// 인증 메일 발송
 			send_mail(member);
+			out.println("<script>");
+			out.println("alert('회원가입 메일이 전송되었습니다!');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
 			return 1;
 		}
 	}
@@ -79,6 +84,8 @@ public class MemberServiceImp implements MemberService {
 		return key;
 	}
 	
+	
+	// 회원가입시 이메일 전송
 	@Override
 	public void send_mail(MemberDTO member) throws Exception{
 		// Mail Server 설정
@@ -196,6 +203,7 @@ public class MemberServiceImp implements MemberService {
 	// 로그아웃
 	@Override
 	public void logout(HttpServletResponse response) throws Exception{
+        System.out.println("\n >>>>>>>>> 로그아웃 시도중 \n");
 		response.setContentType("text/html;charset=utf-8"); // 응답받은 객체의 캐릭터형 지정
 		PrintWriter out = response.getWriter();
 		out.println("<script>");

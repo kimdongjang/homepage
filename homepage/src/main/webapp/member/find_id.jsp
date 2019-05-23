@@ -10,7 +10,7 @@
 <script>
 	$(function(){
 		$("#loginBtn").click(function(){
-			location.href='../member/login_form.do';
+			location.href='./member/login_form.do';
 		})
 	})
 </script>

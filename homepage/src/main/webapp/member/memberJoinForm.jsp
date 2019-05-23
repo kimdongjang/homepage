@@ -16,7 +16,7 @@
 				$("#pw").val("").focus();
 				$("#pw2").val("");
 				return false;
-			}else if ($("#pw").val().length < 8) {
+			}else if ($("#pw").val().length < 4) {
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
@@ -28,7 +28,7 @@
 		
 		$("#id").keyup(function() {
 			$.ajax({
-				url : "../member/check_id.do",
+				url : "./member/check_id.do",
 				type : "POST",
 				data : {
 					id : $("#id").val()
@@ -73,7 +73,7 @@
 				<h3>Member Join Form</h3>
 			</div>
 			<div>
-				<form id="joinForm" action="../member/join_member.do" method="post">
+				<form id="joinForm" action="./member/join_member.do" method="post">
 					<p>
 						<label>ID</label> 
 						<input class="w3-input" type="text" id="id" name="id" required> 

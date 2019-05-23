@@ -44,6 +44,7 @@ public class MemberController {
 	@RequestMapping(value = "/join_member.do", method = RequestMethod.POST)
 	public String join_member(@ModelAttribute MemberDTO member, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
 		rttr.addFlashAttribute("result", service.join_member(member, response));
+		//return "index";
 		return "redircet:./memberJoinForm.do";
 	}
 	
@@ -54,7 +55,7 @@ public class MemberController {
 	}
 	
 	// 로그인 폼 이동
-	@RequestMapping(value="/login_form.do", method=RequestMethod.GET)
+	@RequestMapping(value="/login_form.do", method= RequestMethod.GET)
 	public String login_form() throws Exception{
 		return "/member/loginForm";
 	}	
@@ -72,7 +73,7 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public void logout(HttpSession session, HttpServletResponse response) throws Exception{
 		session.invalidate();
-		//session.removeAttribute("member");
+//		session.removeAttribute("member");
 		service.logout(response);
 	}
 	
