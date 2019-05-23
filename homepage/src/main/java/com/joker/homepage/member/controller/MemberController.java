@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,8 +57,7 @@ public class MemberController {
 	@RequestMapping(value="/login_form.do", method=RequestMethod.GET)
 	public String login_form() throws Exception{
 		return "/member/loginForm";
-	}
-	
+	}	
 
 	// 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -65,5 +65,29 @@ public class MemberController {
 		member = service.login(member, response);
 		session.setAttribute("member", member);
 		return "index";
+	}
+	
+	//controller에서  session을 제거(removeAttribute 또는 invalidate) 해주고 위에서 생성한 logout 메서드를 호출
+	// 로그아웃
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	public void logout(HttpSession session, HttpServletResponse response) throws Exception{
+		session.invalidate();
+		//session.removeAttribute("member");
+		service.logout(response);
+	}
+	
+	// 아이디 찾기 폼
+	@RequestMapping(value = "/find_id_form.do")
+	public String find_id_form() throws Exception{
+		return "/member/find_id_form";
+	}	
+	
+	// @RequestParam 및 @ModelAttribute 어노테이션 관련 정보
+	// https://heavenly-appear.tistory.com/302
+	// 아이디 찾기
+	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", service.find_id(response, email));
+		return "/member/find_id";
 	}
 }

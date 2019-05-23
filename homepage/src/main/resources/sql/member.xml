@@ -34,4 +34,8 @@
 		update member set log_date = now() where id = #{id}
 	</update>
 	
+	<!-- 아이디 찾기 -->
+	<select id="find_id" parameterType="String" resultType="String">
+		select id from member where email = #{email}
+	</select>
 </mapper>

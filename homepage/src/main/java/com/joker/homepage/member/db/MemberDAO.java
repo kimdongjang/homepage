@@ -48,4 +48,9 @@ public class MemberDAO {
 	public int update_log(String id) throws Exception{
 		return sqlsession.update("member.update_log", id);
 	}
+	
+	// 아이디 찾기
+	public String find_id(String email) throws Exception {
+		return sqlsession.selectOne("member.find_id", email);
+	}
 }

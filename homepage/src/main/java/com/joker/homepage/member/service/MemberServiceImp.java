@@ -192,4 +192,34 @@ public class MemberServiceImp implements MemberService {
 			}
 		}
 	}
+	
+	// 로그아웃
+	@Override
+	public void logout(HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8"); // 응답받은 객체의 캐릭터형 지정
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("location.href=document.referrer;");
+		out.println("</script>");
+		out.close();
+	}
+	
+	// 아이디 찾기
+	@Override
+	public String find_id(HttpServletResponse response, String email) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String id = manager.find_id(email); // 데이터베이스를 통해 이메일과 일치하는 id를 반환해서 리턴해줌 => jsp '#id' 선택자에 반영
+		
+		if (id == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			return id;
+		}
+	}
 }
