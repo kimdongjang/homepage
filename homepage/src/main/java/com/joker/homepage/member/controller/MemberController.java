@@ -1,6 +1,7 @@
 package com.joker.homepage.member.controller;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,5 +56,14 @@ public class MemberController {
 	@RequestMapping(value="/login_form.do", method=RequestMethod.GET)
 	public String login_form() throws Exception{
 		return "/member/loginForm";
+	}
+	
+
+	// ·Î±×ÀÎ
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String login(@ModelAttribute MemberDTO member, HttpSession session, HttpServletResponse response) throws Exception{
+		member = service.login(member, response);
+		session.setAttribute("member", member);
+		return "index";
 	}
 }
