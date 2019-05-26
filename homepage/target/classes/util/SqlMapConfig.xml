@@ -7,5 +7,6 @@
 	<!-- MyBatis의 TypeAlias :: 데이터베이스에 사용할 객체 등록 -->
 	<typeAliases>
 		<typeAlias alias="member" type="com.joker.homepage.member.db.MemberDTO"/>
+		<typeAlias alias="board" type="com.joker.homepage.board.db.BoardDTO"/>
 	</typeAliases>
 </configuration>

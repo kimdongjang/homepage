@@ -23,6 +23,7 @@
 						</span>
 						<input class="w3-input" id="id" name="id" type="text" required>
 					</p>
+					
 					<p>
 						<label>Password</label>
 						<span class="w3-right w3-button w3-hover-white" title="비밀번호 찾기" id="find_pw_btn">

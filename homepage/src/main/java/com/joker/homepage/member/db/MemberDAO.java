@@ -53,4 +53,22 @@ public class MemberDAO {
 	public String find_id(String email) throws Exception {
 		return sqlsession.selectOne("member.find_id", email);
 	}
+	
+	// 비밀번호 변경
+	@Transactional
+	public int update_pw(MemberDTO member) throws Exception{
+		return sqlsession.update("member.update_pw", member);
+	}
+	
+	// 마이페이지
+	@Transactional
+	public int update_mypage(MemberDTO member) throws Exception{
+		return sqlsession.update("member.update_mypage", member);
+	}
+	
+	// 회원탈퇴
+	@Transactional
+	public int withdrawal(MemberDTO member) throws Exception{
+		return sqlsession.delete("member.withdrawal", member);
+	}
 }

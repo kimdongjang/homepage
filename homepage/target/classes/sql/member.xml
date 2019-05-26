@@ -38,4 +38,19 @@
 	<select id="find_id" parameterType="String" resultType="String">
 		select id from member where email = #{email}
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="update_pw" parameterType="member">
+		update member set pw = #{pw} where id = #{id}
+	</update>
+	
+	<!-- 회원정보 수정 -->
+	<update id="update_mypage" parameterType="member">
+		update member set email = #{email} where id = #{id}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="withdrawal" parameterType="member">
+		delete from member where id = #{id} and pw = #{pw}
+	</delete>
 </mapper>

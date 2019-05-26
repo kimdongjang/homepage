@@ -61,11 +61,12 @@ public class MemberController {
 	}	
 
 	// 로그인
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String login(@ModelAttribute MemberDTO member, HttpSession session, HttpServletResponse response) throws Exception{
 		member = service.login(member, response);
 		session.setAttribute("member", member);
-		return "index";
+		//return "/member/index";
+		return "redirect:/member/index.jsp";
 	}
 	
 	//controller에서  session을 제거(removeAttribute 또는 invalidate) 해주고 위에서 생성한 logout 메서드를 호출
@@ -73,7 +74,7 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public void logout(HttpSession session, HttpServletResponse response) throws Exception{
 		session.invalidate();
-//		session.removeAttribute("member");
+		//session.removeAttribute("member");
 		service.logout(response);
 	}
 	
@@ -90,4 +91,49 @@ public class MemberController {
 		md.addAttribute("id", service.find_id(response, email));
 		return "/member/find_id";
 	}
+	
+	// 비밀번호 찾기 폼
+	@RequestMapping(value = "/find_pw_form.do")
+	public String find_pw_form() throws Exception{
+		return "/member/find_pw_form";
+	}
+	
+	// 비밀번호 찾기
+	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
+	public void find_pw(@ModelAttribute MemberDTO member, HttpServletResponse response) throws Exception{
+		service.find_pw(response, member);
+	}
+	
+	// 마이페이지 이동
+	@RequestMapping(value = "/mypage.do")
+	public String mypage() throws Exception{
+		return "/member/mypage";
+	}
+	
+	// mypage 수정
+	@RequestMapping(value = "/update_mypage.do", method = RequestMethod.POST)
+	public String update_mypage(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
+		session.setAttribute("member", service.update_mypage(member));
+		rttr.addFlashAttribute("msg", "회원정보 수정 완료");
+		return "redirect:/member/mypage.do";
+	}
+	
+	// 비밀번호 변경
+	@RequestMapping(value = "/update_pw.do", method = RequestMethod.POST)
+	public String update_pw(@ModelAttribute MemberDTO member, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
+		session.setAttribute("member", service.update_pw(member, old_pw, response));
+		rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
+		return "redirect:/member/mypage.do";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "/withdrawal.do", method = RequestMethod.POST)
+	public String withdrawal_form(@ModelAttribute MemberDTO member, HttpSession session, HttpServletResponse response) throws Exception{
+		if(service.withdrawal(member, response)) {
+			session.invalidate();
+		}
+		return "redirect:/index.do";
+	}
+	
+	
 }

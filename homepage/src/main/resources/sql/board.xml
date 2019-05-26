@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- mybatis mapper 파일, 디비에 연동되는 쿼리 -->
+
+<mapper namespace="board">
+	<!-- 게시판 글 작성 -->
+	<insert id="board_write" parameterType="board">
+		insert into board(id, subject, content) values(#{id}, #{subject}, #{content})
+	</insert>
+</mapper>	
